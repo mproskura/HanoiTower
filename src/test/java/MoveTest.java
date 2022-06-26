@@ -6,9 +6,9 @@ class MoveTest {
 
     @Test
     void makeTheMove() {
-        Tower sourceTower = new Tower(1);
-        Tower targetTower = new Tower(2);
-        Disk testDisk = new Disk(1);
+        Tower sourceTower = new Tower((byte) 1);
+        Tower targetTower = new Tower((byte)2);
+        Disk testDisk = new Disk((byte)1);
         sourceTower.putDisk(testDisk);
 
         Move move = new Move(sourceTower,targetTower);
@@ -20,11 +20,11 @@ class MoveTest {
 
     @Test
     void makeTheMove2() {
-        Tower sourceTower = new Tower(1);
-        Tower targetTower = new Tower(2);
-        Disk testDisk1 = new Disk(1);
-        Disk testDisk2 = new Disk(2);
-        Disk testDisk3 = new Disk(3);
+        Tower sourceTower = new Tower((byte)1);
+        Tower targetTower = new Tower((byte)2);
+        Disk testDisk1 = new Disk((byte)1);
+        Disk testDisk2 = new Disk((byte)2);
+        Disk testDisk3 = new Disk((byte)3);
         sourceTower.putDisk(testDisk1);
         sourceTower.putDisk(testDisk2);
         sourceTower.putDisk(testDisk3);

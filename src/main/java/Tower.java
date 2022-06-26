@@ -6,10 +6,10 @@ import java.util.*;
 
 @Data
 public class Tower {
-    private final int towerNumber;
+    private final byte towerNumber;
     private Stack<Disk> diskStack;
 
-    public Tower(int towerNumber) {
+    public Tower(byte towerNumber) {
         this.towerNumber = towerNumber;
         diskStack = new Stack<>();
     }

@@ -6,7 +6,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class Disk {
-    private final int number;
+    private final byte number;
 
     public boolean canGoOnTop(Disk disk){
         if (this.number < disk.number){

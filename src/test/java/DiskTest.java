@@ -5,8 +5,8 @@ class DiskTest {
 
     @org.junit.jupiter.api.Test
     void canGoOnTop() {
-        Disk disk1= new Disk(1);
-        Disk disk3 = new Disk(3);
+        Disk disk1= new Disk((byte)1);
+        Disk disk3 = new Disk((byte)3);
         assertFalse(disk3.canGoOnTop(disk1));
         assertTrue(disk1.canGoOnTop(disk3));
     }
