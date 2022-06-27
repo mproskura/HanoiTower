@@ -14,7 +14,6 @@ public class ScenarioAnalysis {
             Scenario scenario = new Scenario(this.scenario, move);
             scenario.makeTheMove();
             newScenarios.add(scenario);
-           // move.print();
         }
         return newScenarios;
     }
@@ -34,7 +33,7 @@ public class ScenarioAnalysis {
     }
 
     private List<Move> getLegalAndNonRevertingMoves(List<Move> possibleMoves) {
-        List<Move> moveList = scenario.getMoveList();
+        List<MoveLog> moveList = scenario.getMoveList();
         List<Move> result = new ArrayList<>();
         for (Move move : possibleMoves) {
             if (moveList.size() == 0) {
@@ -42,7 +41,7 @@ public class ScenarioAnalysis {
                     result.add(move);
                 }
             } else {
-                Move lastMove = moveList.get(moveList.size() - 1
+                MoveLog lastMove = moveList.get(moveList.size() - 1
                 );
                 if (move.isMoveLegal() && !move.reversesPreviousMove(lastMove)) {
                     result.add(move);

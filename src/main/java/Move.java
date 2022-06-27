@@ -23,8 +23,8 @@ public class Move {
         return true;
     }
 
-    public boolean reversesPreviousMove(Move previousMove) {
-        if (previousMove.sourceTower.equals(targetTower) && previousMove.targetTower.equals(sourceTower)) {
+    public boolean reversesPreviousMove(MoveLog previousMove) {
+        if (previousMove.getSourceTowerNumber() == targetTower.getTowerNumber() && previousMove.getTargetTowerNumber()==sourceTower.getTowerNumber()) {
             return true;
         } else {
             return false;

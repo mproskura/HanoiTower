@@ -6,7 +6,7 @@ import java.util.List;
 @Data
 public class Scenario {
     List<Tower> towers;
-    List<Move> moveList;
+    List<MoveLog> moveList;
     Move nextMove;
 
     public Scenario(List<Tower> towers) {
@@ -15,10 +15,10 @@ public class Scenario {
     }
 
     public Scenario(Scenario oldScenario, Move nextMove) {
-        this.moveList = cloneMoveList(oldScenario.getMoveList());
+        this.moveList = cloneMoveLog(oldScenario.getMoveList());
         this.towers = Tower.cloneList(oldScenario.getTowers());
         this.nextMove = nextMove;
-        moveList.add(nextMove);
+        moveList.add(new MoveLog(nextMove));
     }
 
     public void makeTheMove() {
@@ -51,14 +51,12 @@ public class Scenario {
 
     public void print() {
         for (int i = 0; i < moveList.size(); i++) {
-            Move currentMove = moveList.get(i);
+            MoveLog currentMove = moveList.get(i);
             System.out.println();
             System.out.println("-------------------------------------------------------");
-            System.out.println("Move " + (i + 1) + ": moving disk " + currentMove.getDiskMoved().get().getNumber() +
-                    " from tower " + currentMove.getSourceTower().getTowerNumber() + " to tower "
-                    + currentMove.getTargetTower().getTowerNumber());
-            currentMove.getSourceTower().print();
-            currentMove.getTargetTower().print();
+            System.out.println("Move " + (i + 1) + ": moving disk " + currentMove.getDiskNumber() +
+                    " from tower " + currentMove.getSourceTowerNumber() + " to tower "
+                    + currentMove.getTargetTowerNumber());
         }
         System.out.println("-------------------------------------------------------");
     }
@@ -66,6 +64,14 @@ public class Scenario {
     public static List<Move> cloneMoveList(List<Move> originalList) {
         List<Move> clonedList = new ArrayList<>();
         for (Move move : originalList) {
+            clonedList.add(move);
+        }
+        return clonedList;
+    }
+
+    public static List<MoveLog> cloneMoveLog(List<MoveLog> originalLog) {
+        List<MoveLog> clonedList = new ArrayList<>();
+        for (MoveLog move : originalLog) {
             clonedList.add(move);
         }
         return clonedList;
