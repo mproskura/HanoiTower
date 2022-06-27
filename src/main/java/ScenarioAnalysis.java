@@ -10,7 +10,8 @@ public class ScenarioAnalysis {
 
     public List<Scenario> analyze() {
         List<Scenario> newScenarios = new ArrayList<>();
-        for (Move move : getLegalAndNonRevertingMoves(getPossibleMoves())) {
+        List<Move> legalAndNonRevertingMoves = getLegalAndNonRevertingMoves(getPossibleMoves());
+        for (Move move : legalAndNonRevertingMoves) {
             Scenario scenario = new Scenario(this.scenario, move);
             scenario.makeTheMove();
             newScenarios.add(scenario);

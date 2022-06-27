@@ -38,6 +38,7 @@ public class Main {
                 newScenarios.addAll(scenarioAnalysis.analyze());
             }
             scenarioList = newScenarios;
+            System.out.println("Analyzing " + scenarioList.size() + " scenarios");
 
             for (Scenario scenario : newScenarios) {
                 if (scenario.isGameWon()) gameWon = true;
