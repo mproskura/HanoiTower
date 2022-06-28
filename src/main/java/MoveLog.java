@@ -4,9 +4,9 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class MoveLog {
-    private final int diskNumber;
-    private final int sourceTowerNumber;
-    private final int targetTowerNumber;
+    private final byte diskNumber;
+    private final byte sourceTowerNumber;
+    private final byte targetTowerNumber;
 
     public MoveLog(Move move) {
         this.diskNumber = move.getDiskMoved().get().getNumber();

@@ -7,10 +7,20 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter number of towers:");
-        byte numberOfTowers = scanner.nextByte();
-        System.out.println("Enter number of disks:");
-        int numberOfDisks = scanner.nextInt();
+        byte numberOfTowers = 1;
+        int numberOfDisks = 1;
+
+        if(args.length==2){
+            numberOfTowers = Byte.valueOf(args[0]);
+            System.out.println("Number of towers " + numberOfTowers);
+            numberOfDisks = Integer.valueOf(args[1]);
+            System.out.println("Number of disks " + numberOfDisks);
+        }else{
+            System.out.println("Enter number of towers:");
+            numberOfTowers = scanner.nextByte();
+            System.out.println("Enter number of disks:");
+            numberOfDisks = scanner.nextInt();
+        }
 
         //create initial scenarios
         List<Tower> towers = new ArrayList<>();
@@ -21,15 +31,15 @@ public class Main {
         //place all disks on first tower
         for (int i = numberOfDisks - 1; i >= 0; i--) {
             Tower sourceTower = towers.get(0);
-            sourceTower.putDisk(new Disk((byte)i));
+            sourceTower.putDisk(new Disk((byte) i));
         }
 
         List<Scenario> scenarioList = new ArrayList<>();
         scenarioList.add(new Scenario(towers));
         boolean gameWon = false;
         //keep analyzing next moves until game is won
-        int moveNumber =0;
-        while (!gameWon ) {
+        int moveNumber = 0;
+        while (!gameWon) {
             moveNumber++;
             System.out.println("Executing move " + moveNumber);
             List<Scenario> newScenarios = new ArrayList<>();
