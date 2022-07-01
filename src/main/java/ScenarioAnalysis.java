@@ -24,7 +24,7 @@ public class ScenarioAnalysis {
         for (Tower sourceTower : scenario.getTowers()) {
             if (!sourceTower.isEmpty()) {
                 for (Tower targetTower : scenario.getTowers()) {
-                    if (!sourceTower.equals(targetTower)) {
+                    if (sourceTower.getTowerNumber()!= targetTower.getTowerNumber()) {
                         possibleMoves.add(new Move(sourceTower, targetTower));
                     }
                 }

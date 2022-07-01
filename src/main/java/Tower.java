@@ -34,12 +34,14 @@ public class Tower {
         }
     }
 
+
     public boolean equals(Tower diskStack) {
-        if (this.towerNumber == diskStack.getTowerNumber()) {
-            return true;
-        } else {
-            return false;
+        if (this.getNumberOfDisks() != diskStack.getNumberOfDisks()) return false;
+        Stack<Disk> comparedStack = diskStack.diskStack;
+        for (int i = 0; i < getTowerNumber(); i++) {
+            if (this.diskStack.peek().getNumber() != comparedStack.peek().getNumber()) return false;
         }
+        return true;
     }
 
     public int getNumberOfDisks() {

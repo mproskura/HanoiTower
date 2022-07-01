@@ -1,6 +1,9 @@
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Data
 @AllArgsConstructor
 public class MoveLog {
@@ -13,4 +16,6 @@ public class MoveLog {
         this.sourceTowerNumber = move.getSourceTower().getTowerNumber();
         this.targetTowerNumber = move.getTargetTower().getTowerNumber();
     }
+
+
 }
