@@ -1,19 +1,22 @@
 import lombok.Data;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Data
 public class Scenario {
     List<Tower> towers;
     List<MoveLog> moveList;
     Move nextMove;
-    List<List<Tower>> towerStates;
+    List<Integer> controlSums;
+
 
     public Scenario(List<Tower> towers) {
         this.towers = towers;
         this.moveList = new ArrayList<>();
-        this.towerStates = new ArrayList<>();
+        this.controlSums = new ArrayList<>();
     }
 
     public Scenario(Scenario oldScenario, Move nextMove) {
@@ -21,11 +24,16 @@ public class Scenario {
         this.towers = Tower.cloneList(oldScenario.getTowers());
         this.nextMove = nextMove;
         moveList.add(new MoveLog(nextMove, towers));
-        towerStates = Tower.cloneListOfLists(oldScenario.getTowerStates());
+        controlSums = new ArrayList<>(oldScenario.controlSums);
     }
 
     public boolean isPreviousStateRepeated() {
-        return PreviousMovesAnalysis.isPreviousStackStateRepeated(towerStates);
+        Set validationSet = new HashSet(controlSums);
+        if (validationSet.size() != controlSums.size()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public void makeTheMove() {
@@ -42,7 +50,7 @@ public class Scenario {
                 towers.add(i, nextMove.getTargetTower());
             }
         }
-        towerStates.add(towers);
+        controlSums.add(ControlSum.getControlNumber(towers));
     }
 
     public int numberOfMoves() {
@@ -65,7 +73,7 @@ public class Scenario {
             System.out.println("Move " + (i + 1) + ": moving disk " + currentMove.getDiskNumber() +
                     " from tower " + currentMove.getSourceTowerNumber() + " to tower "
                     + currentMove.getTargetTowerNumber());
-            System.out.println("Towers state: " + ControlSum.getControlNumber(towerStates.get(i)));
+            System.out.println("Towers state: " + controlSums.get(i));
         }
         System.out.println("-------------------------------------------------------");
     }

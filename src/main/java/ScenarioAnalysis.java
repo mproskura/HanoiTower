@@ -15,10 +15,10 @@ public class ScenarioAnalysis {
             Scenario scenario = new Scenario(this.scenario, move);
             //if scenario leads back to previous state of disks it is considered non optimal
             //and hence dropped from further analysis
-          // if (!scenario.isPreviousStateRepeated() ) {
+           if (!scenario.isPreviousStateRepeated() ) {
                 scenario.makeTheMove();
                 newScenarios.add(scenario);
-          // }
+           }
         }
         return newScenarios;
     }
