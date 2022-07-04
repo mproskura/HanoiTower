@@ -1,7 +1,4 @@
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
-
-import java.sql.SQLOutput;
 import java.util.*;
 
 @Data
@@ -36,6 +33,7 @@ public class Tower {
 
 
     public boolean equals(Tower diskStack) {
+        if (this.isEmpty() && diskStack.isEmpty()) return true;
         if (this.getNumberOfDisks() != diskStack.getNumberOfDisks()) return false;
         Stack<Disk> comparedStack = diskStack.diskStack;
         for (int i = 0; i < getTowerNumber(); i++) {
@@ -63,6 +61,14 @@ public class Tower {
             }
         }
         return towerClone;
+    }
+
+    public static List<List<Tower>> cloneListOfLists(List<List<Tower>> originalListOfLists){
+        List<List<Tower>> clonedListOfLists = new ArrayList<>();
+        for (List<Tower> list : originalListOfLists){
+            clonedListOfLists.add(cloneList(list));
+        }
+        return clonedListOfLists;
     }
 
     public static List<Tower> cloneList(List<Tower> originalList) {

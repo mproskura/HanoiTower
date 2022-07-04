@@ -13,8 +13,12 @@ public class ScenarioAnalysis {
         List<Move> legalAndNonRevertingMoves = getLegalAndNonRevertingMoves(getPossibleMoves());
         for (Move move : legalAndNonRevertingMoves) {
             Scenario scenario = new Scenario(this.scenario, move);
-            scenario.makeTheMove();
-            newScenarios.add(scenario);
+            //if scenario leads back to previous state of disks it is considered non optimal
+            //and hence dropped from further analysis
+          // if (!scenario.isPreviousStateRepeated() ) {
+                scenario.makeTheMove();
+                newScenarios.add(scenario);
+          // }
         }
         return newScenarios;
     }
@@ -24,7 +28,7 @@ public class ScenarioAnalysis {
         for (Tower sourceTower : scenario.getTowers()) {
             if (!sourceTower.isEmpty()) {
                 for (Tower targetTower : scenario.getTowers()) {
-                    if (sourceTower.getTowerNumber()!= targetTower.getTowerNumber()) {
+                    if (sourceTower.getTowerNumber() != targetTower.getTowerNumber()) {
                         possibleMoves.add(new Move(sourceTower, targetTower));
                     }
                 }

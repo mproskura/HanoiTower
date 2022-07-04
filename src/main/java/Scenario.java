@@ -8,17 +8,24 @@ public class Scenario {
     List<Tower> towers;
     List<MoveLog> moveList;
     Move nextMove;
+    List<List<Tower>> towerStates;
 
     public Scenario(List<Tower> towers) {
         this.towers = towers;
         this.moveList = new ArrayList<>();
+        this.towerStates = new ArrayList<>();
     }
 
     public Scenario(Scenario oldScenario, Move nextMove) {
         this.moveList = cloneMoveLog(oldScenario.getMoveList());
         this.towers = Tower.cloneList(oldScenario.getTowers());
         this.nextMove = nextMove;
-        moveList.add(new MoveLog(nextMove));
+        moveList.add(new MoveLog(nextMove, towers));
+        towerStates = Tower.cloneListOfLists(oldScenario.getTowerStates());
+    }
+
+    public boolean isPreviousStateRepeated() {
+        return PreviousMovesAnalysis.isPreviousStackStateRepeated(towerStates);
     }
 
     public void makeTheMove() {
@@ -35,6 +42,7 @@ public class Scenario {
                 towers.add(i, nextMove.getTargetTower());
             }
         }
+        towerStates.add(towers);
     }
 
     public int numberOfMoves() {
@@ -57,6 +65,7 @@ public class Scenario {
             System.out.println("Move " + (i + 1) + ": moving disk " + currentMove.getDiskNumber() +
                     " from tower " + currentMove.getSourceTowerNumber() + " to tower "
                     + currentMove.getTargetTowerNumber());
+            System.out.println("Towers state: " + ControlSum.getControlNumber(towerStates.get(i)));
         }
         System.out.println("-------------------------------------------------------");
     }
